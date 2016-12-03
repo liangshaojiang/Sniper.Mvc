@@ -1,0 +1,11 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "500错误";
+    var ex = Model.Exception;
+}
+<div class="page-content">
+    <h1 class="text-danger">系统发生错误.</h1>
+    <h2 class="text-danger">控制器：@Model.ControllerName <br />方法：@Model.ActionName</h2>
+    <p class="text-danger"><b>描述：</b><br />@(Html.Raw(Model.Exception.Message.Replace("\r\n","<br />")))</p>
+</div>

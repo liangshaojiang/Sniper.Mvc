@@ -1,0 +1,56 @@
+﻿@using Sniper.Mapping.SysUserRole
+@model UserRoleViewModel
+@{
+    ViewBag.Title = "设置用户角色";
+}
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.RouteUrl("homeIndex")">首页</a>
+        </li>
+        <li><a href="@ViewBag.ReturnUrl">系统用户列表</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ul>
+</div>
+<div class="page-content">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12">
+            @using (Html.BeginRouteForm("editUserRole", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.Hidden("Id", Model.SysUser.Id)
+                @Html.AntiForgeryToken()
+                <div class="widget-box">
+                    <div class="widget-header widget-header-flat">
+                        <h4 class="widget-title">@(Model.SysUser.Name) [@(Model.SysUser.Account)]</h4>
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div class="checkbox">
+                                @foreach (var item in Model.RoleList)
+                                {
+                                    <label>
+                                        <input name="roleIds" value="@item.Id" @(Model.UserRoleList != null && Model.UserRoleList.Any(o => o.Id == item.Id) ? "checked=checked" : "") type="checkbox" class="ace">
+                                        <span class="lbl">@item.Name</span>
+                                    </label>
+                                }
+                            </div>
+                            <div class="space-10"></div>
+                            <div class="row">
+                                <div class="col-sm-3 col-lg-offset-1">
+                                    <button class="btn btn-sm btn-primary" type="submit">
+                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@using Sniper.Admin.Framework.Menu
+@{
+    var list = ReflectManager.Instance.Descripers;
+}
+@helper RenderMenuItem(DescriperAttribute item, List<DescriperAttribute> list)
+{
+string href = string.Empty;
+if (!String.IsNullOrEmpty(item.RouteName))
+{
+    href = Url.RouteUrl(item.RouteName);
+}
+if (!String.IsNullOrEmpty(item.Controller) && !String.IsNullOrEmpty(item.Action))
+{
+    href = Url.Action(item.Action, item.Controller);
+}
+Guid id = Guid.NewGuid();
+    <li id="li_@id" class="@(Request.Url.LocalPath.Equals(href,StringComparison.InvariantCultureIgnoreCase)?"active":"")">
+        @{
+            var childNodes = list.Where(o => o.FatherResource == item.SysResource && o.IsMenu).OrderBy(o => o.Name).ToList();
+        }
+        <a href="@(!String.IsNullOrEmpty(href)?href:"javascript:")" class="@(childNodes.Any()?"dropdown-toggle":"")">
+            <i class="@item.CssClass"></i>
+            <span class="menu-text"> @item.Name </span>
+            @if (childNodes.Any())
+            {
+                <b class="arrow fa fa-angle-down"></b>
+            }
+        </a>
+        <b class="arrow"></b>
+        @if (childNodes.Any())
+        {
+            <ul class="submenu">
+                @foreach (var childItem in childNodes)
+                {
+                    if (authorizeSysResource(childItem.SysResource))
+                    {
+                        @RenderMenuItem(childItem, list)
+                    }
+                }
+            </ul>
+        }
+    </li>
+            if (Request.Url.LocalPath.Equals(href, StringComparison.InvariantCultureIgnoreCase))
+            {
+                <script>
+                    $('#li_@(id)').parents('li').addClass('open active');
+                </script>
+            }
+}
+<div id="sidebar" class="sidebar responsive sidebar-fixed">
+    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+                <i class="ace-icon fa fa-signal"></i>
+            </button>
+            <button class="btn btn-info">
+                <i class="ace-icon fa fa-pencil"></i>
+            </button>
+            <button class="btn btn-warning">
+                <i class="ace-icon fa fa-users"></i>
+            </button>
+            <button class="btn btn-danger">
+                <i class="ace-icon fa fa-cogs"></i>
+            </button>
+        </div>
+    </div>
+
+    <ul class="nav nav-list">
+        @if (list != null && list.Any())
+        {
+            var nodes = list.Where(o => String.IsNullOrEmpty(o.FatherResource) && o.IsMenu).OrderBy(o => o.Name).ToList();
+            foreach (var item in nodes)
+            {
+                if (authorizeSysResource(item.SysResource))
+                {
+                    @RenderMenuItem(item, list)
+                }
+            }
+        }
+    </ul><!-- /.nav-list -->
+</div>

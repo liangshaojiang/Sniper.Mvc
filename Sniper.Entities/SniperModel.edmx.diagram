@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cf5dfb67eaed4bb488afd1b898ad4ec7" Name="Diagram1" >
+        <EntityTypeShape EntityType="YuanGouModel.ActivityLog" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="YuanGouModel.Setting" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="YuanGouModel.SysLog" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="YuanGouModel.SysPermission" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="YuanGouModel.SysRole" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="YuanGouModel.SysStore" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="YuanGouModel.SysUser" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="YuanGouModel.SysUserLoginLog" Width="1.5" PointX="3" PointY="10.125" />
+        <EntityTypeShape EntityType="YuanGouModel.SysUserRole" Width="1.5" PointX="5.25" PointY="12.625" />
+        <EntityTypeShape EntityType="YuanGouModel.SysUserToken" Width="1.5" PointX="3" PointY="16.5" />
+        <AssociationConnector Association="YuanGouModel.FK_PermissionRecord_SysRole" />
+        <AssociationConnector Association="YuanGouModel.FK_PermissionRecord_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysRole_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysRole_SysUser1" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUserRole_SysRole" />
+        <AssociationConnector Association="YuanGouModel.FK_SysStore_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysStore_SysUser_Modifier" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUser_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUser_SysUser_creator" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUserLoginLog_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUserRole_SysUser" />
+        <AssociationConnector Association="YuanGouModel.FK_SysUserToken_SysUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

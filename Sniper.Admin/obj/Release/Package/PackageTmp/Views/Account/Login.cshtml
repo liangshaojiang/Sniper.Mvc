@@ -1,0 +1,163 @@
+﻿@{
+    Layout = null;
+}
+@model Sniper.Admin.Models.LoginModel
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <title>用户登录 - 系统管理</title>
+    <meta name="description" content="User login page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/ace/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/ace/assets/css/ace.min.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    <!--[if lte IE 9]>
+        <link href="~/Content/ace/assets/css/ace-ie.css" rel="stylesheet" />
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="~/Content/ace/assets/js/html5shiv.js"></script>
+        <script src="~/Content/ace/assets/js/respond.js"></script>
+    <![endif]-->
+</head>
+<body class="login-layout blur-login">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h1>
+                                <i class="ace-icon @(WorkContext.Store?.IconClass) green"></i>
+                                <span class="white" id="id-text2">@(WorkContext.Store?.Name)</span>
+                            </h1>
+                            <h4 class="blue" id="id-company-text">&copy; @(WorkContext.Store?.CompanyName)</h4>
+                        </div>
+
+                        <div class="space-6"></div>
+
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
+                                            <i class="ace-icon fa fa-coffee green"></i>
+                                            请输入您的账号密码
+                                        </h4>
+
+                                        <div class="space-6"></div>
+                                        @using (Html.BeginRouteForm("login", new { }, FormMethod.Post, new { onsubmit = "return false;" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <fieldset>
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(m => m.Account, new { @class = "form-control", placeholder = "用户名" })
+                                                        <i class="ace-icon fa fa-user"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "密码" })
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <div class="space"></div>
+
+                                                <div class="clearfix">
+                                                    <label class="inline">
+                                                        <input type="checkbox" id="RememberMe" name="RememberMe" value="true" class="ace" />
+                                                        <span class="lbl"> 记住我</span>
+                                                    </label>
+                                                    <button type="button" id="myButton" data-loading-text="登录中..." class="width-35 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-key"></i>
+                                                        <span class="bigger-110">登录</span>
+                                                    </button>
+                                                </div>
+                                                <div class="space-4"></div>
+                                            </fieldset>
+                                        }
+                                        <div class="social-or-login center">
+                                            <span class="bigger-110">登 录 提 示</span>
+                                        </div>
+                                        <div class="social-login">
+                                            <p id="error_msg">登录密码错误过多账号将被锁定</p>
+                                        </div>
+                                        <div class="space-6"></div>
+
+                                    </div><!-- /.widget-main -->
+
+                                </div><!-- /.widget-body -->
+                            </div><!-- /.login-box -->
+
+                        </div><!-- /.position-relative -->
+
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+    <!-- basic scripts -->
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/md5")
+    @Scripts.Render("~/bundles/cookie")
+    @Scripts.Render("~/bundles/ace")
+
+    <script>
+        $(function () {
+            $('#myButton').on('click', function () {
+                if ($('form').valid()) {
+                    var $btn = $(this).button('loading');
+                    $.get('@Url.RouteUrl("getSalt")/?account=' + $('#Account').val(), function (data) {
+                        var password = $.md5($('#Password').val() + data);
+                        console.log(password);
+                        password = $.md5(password + $.cookie('l_r'));
+                        console.log(password);
+                        $.ajax({
+                            url: '@Url.RouteUrl("login")',
+                            type: 'post',
+                            datatype: 'json',
+                            data: { Account: $('#Account').val(), Password: password, RememberMe: $('#RememberMe:checked').val(), __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val() },
+                            success: function (data) {
+                                $('#error_msg').html(data.Message);
+                                if (data.Status) {
+                                    window.location.href = '@Url.RouteUrl("homeIndex")';
+                                }
+                            },
+                            error: function (xhr) {
+                                $('#error_msg').html(xhr.responseJSON.Message);
+                            },
+                            complete: function () {
+                                $btn.button('reset');
+                            }
+                        });
+                    });
+                };
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

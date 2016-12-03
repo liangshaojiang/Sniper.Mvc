@@ -1,0 +1,98 @@
+﻿@model Sniper.Admin.Framework.Datatable.Pagination
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.TotalCount>0)
+{
+    //默认显示最多7个连续按钮
+    int display = 7;
+
+    int minDisplay = 1;
+    int maxDisplay = 7;
+    if (Model.TotalPages > display)
+    {
+        if (Model.PageIndex + display / 2 >= Model.TotalPages)
+        {
+            maxDisplay = Model.TotalPages;
+            minDisplay = Model.TotalPages - display;
+        }
+        else if (Model.PageIndex > display / 2)
+        {
+            minDisplay = Model.PageIndex - display / 2;
+            maxDisplay = Model.PageIndex + display / 2;
+        }
+    }
+    else
+    {
+        minDisplay = 1;
+        maxDisplay = Model.TotalPages;
+    }
+
+    <nav>
+        <ul class="pagination">
+            <li class="disabled"><a>当前@(Model.PageIndex)/@(Model.TotalPages)页 共@(Model.TotalCount)条</a></li>
+            @if (Model.HasPreviousPage)
+            {
+                <li><a href="@String.Format(Model.LinkUrl,Model.PageIndex-1,Model.PageSize)">上一页</a></li>
+            }
+            else
+            {
+                <li class="disabled"><a href="javascript:">上一页</a></li>
+            }
+            @if (Model.PageIndex > display / 2 + 2)
+            {
+                <li><a href="@String.Format(Model.LinkUrl,1,Model.PageSize)">1</a></li>
+                <li><a href="javascript:">...</a></li>
+            }
+            else if (Model.PageIndex == display / 2 + 2)
+            {
+                <li><a href="@String.Format(Model.LinkUrl,1,Model.PageSize)">1</a></li>
+            }
+            @for (int i = minDisplay; i <= maxDisplay; i++)
+            {
+                if (i == Model.PageIndex)
+                {
+                    <li class="active"><a href="javascript:">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="@String.Format(Model.LinkUrl,i,Model.PageSize)">@i</a></li>
+                }
+            }
+            @if (maxDisplay + 1 < Model.TotalPages)
+            {
+                <li><a href="javascript:">...</a></li>
+                <li><a href="@String.Format(Model.LinkUrl,Model.TotalPages,Model.PageSize)">@Model.TotalPages</a></li>
+            }
+            else if (maxDisplay + 1 == Model.TotalPages)
+            {
+                <li><a href="@String.Format(Model.LinkUrl,Model.TotalPages,Model.PageSize)">@Model.TotalPages</a></li>
+            }
+            @if (Model.HasNextPage)
+            {
+                <li class="next"><a href="@String.Format(Model.LinkUrl,Model.PageIndex+1,Model.PageSize)">下一页</a></li>
+            }
+            else
+            {
+                <li class="disabled"><a href="javascript:">下一页</a></li>
+            }
+            <li>&nbsp;&nbsp;</li>
+            <li > 
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown">
+                        每页@(Model.PageSize)条 <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@String.Format(Model.LinkUrl,Model.PageIndex, 20)">每页20条</a></li>
+                        <li><a href="@String.Format(Model.LinkUrl,Model.PageIndex, 30)">每页30条</a></li>
+                        <li><a href="@String.Format(Model.LinkUrl,Model.PageIndex, 50)">每页50条</a></li>
+                        <li><a href="@String.Format(Model.LinkUrl,Model.PageIndex, 100)">每页100条</a></li>
+                    </ul>
+                </div>
+                
+            </li>
+        </ul>
+    </nav>
+
+} 

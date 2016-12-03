@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YuanGouModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActivityLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ActivityName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Method" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SysLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Level" Type="int" Nullable="false" />
+    <Property Name="ShortMessage" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullMessage" Type="nvarchar(max)" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="PageUrl" Type="nvarchar(max)" />
+    <Property Name="ReferrerUrl" Type="nvarchar(max)" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SysPermission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SysResource" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SysRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+    <Property Name="Modifier" Type="uniqueidentifier" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysStore">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="SslEnabled" Type="bit" Nullable="false" />
+    <Property Name="Disabled" Type="bit" Nullable="false" />
+    <Property Name="IconClass" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+    <Property Name="Modifier" Type="uniqueidentifier" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SysUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Account" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Salt" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="2" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="IsAdmin" Type="bit" Nullable="false" />
+    <Property Name="CreationTime" Type="datetime" Nullable="false" />
+    <Property Name="LoginFailedNum" Type="int" Nullable="false" />
+    <Property Name="AllowLoginTime" Type="datetime" />
+    <Property Name="LoginLock" Type="bit" Nullable="false" />
+    <Property Name="LastLoginTime" Type="datetime" />
+    <Property Name="LastIpAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastActivityTime" Type="datetime" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DeletedTime" Type="datetime" />
+    <Property Name="ModifiedTime" Type="datetime" />
+    <Property Name="Modifier" Type="uniqueidentifier" />
+    <Property Name="Creator" Type="uniqueidentifier" />
+    <Property Name="Avatar" Type="image" />
+  </EntityType>
+  <EntityType Name="SysUserLoginLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IpAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoginTime" Type="datetime" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SysUserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SysUserToken">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SysUserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ExpireTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PermissionRecord_SysRole">
+    <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+    <End Role="SysPermission" Type="Self.SysPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysPermission">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PermissionRecord_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysPermission" Type="Self.SysPermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysPermission">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysRole_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysRole" Type="Self.SysRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysRole">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysRole_SysUser1">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+    <End Role="SysRole" Type="Self.SysRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysRole">
+        <PropertyRef Name="Modifier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysStore_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysStore" Type="Self.SysStore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysStore">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysStore_SysUser_Modifier">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+    <End Role="SysStore" Type="Self.SysStore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysStore">
+        <PropertyRef Name="Modifier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUser_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysUser1" Type="Self.SysUser" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUser1">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUser_SysUser_creator">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+    <End Role="SysUser1" Type="Self.SysUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUser1">
+        <PropertyRef Name="Creator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserLoginLog_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysUserLoginLog" Type="Self.SysUserLoginLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUserLoginLog">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserRole_SysRole">
+    <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+    <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysRole">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUserRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserRole_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SysUserToken_SysUser">
+    <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+    <End Role="SysUserToken" Type="Self.SysUserToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SysUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SysUserToken">
+        <PropertyRef Name="SysUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YuanGouModelStoreContainer">
+    <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysPermission" EntityType="Self.SysPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysStore" EntityType="Self.SysStore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysUserLoginLog" EntityType="Self.SysUserLoginLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysUserRole" EntityType="Self.SysUserRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SysUserToken" EntityType="Self.SysUserToken" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PermissionRecord_SysRole" Association="Self.FK_PermissionRecord_SysRole">
+      <End Role="SysRole" EntitySet="SysRole" />
+      <End Role="SysPermission" EntitySet="SysPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PermissionRecord_SysUser" Association="Self.FK_PermissionRecord_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysPermission" EntitySet="SysPermission" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysRole_SysUser" Association="Self.FK_SysRole_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysRole" EntitySet="SysRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysRole_SysUser1" Association="Self.FK_SysRole_SysUser1">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysRole" EntitySet="SysRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysStore_SysUser" Association="Self.FK_SysStore_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysStore" EntitySet="SysStore" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysStore_SysUser_Modifier" Association="Self.FK_SysStore_SysUser_Modifier">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysStore" EntitySet="SysStore" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUser_SysUser" Association="Self.FK_SysUser_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysUser1" EntitySet="SysUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUser_SysUser_creator" Association="Self.FK_SysUser_SysUser_creator">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysUser1" EntitySet="SysUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserLoginLog_SysUser" Association="Self.FK_SysUserLoginLog_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysUserLoginLog" EntitySet="SysUserLoginLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserRole_SysRole" Association="Self.FK_SysUserRole_SysRole">
+      <End Role="SysRole" EntitySet="SysRole" />
+      <End Role="SysUserRole" EntitySet="SysUserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserRole_SysUser" Association="Self.FK_SysUserRole_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysUserRole" EntitySet="SysUserRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SysUserToken_SysUser" Association="Self.FK_SysUserToken_SysUser">
+      <End Role="SysUser" EntitySet="SysUser" />
+      <End Role="SysUserToken" EntitySet="SysUserToken" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

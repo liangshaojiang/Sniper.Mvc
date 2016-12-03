@@ -1,0 +1,46 @@
+﻿@model Sniper.Entities.SysUser
+<style>
+
+</style> 
+<select id="select2_user" name="suid" class="form-control" style="width:150px;">
+    @if (Model != null)
+    {
+        <option value="@Model.Id">@Model.Name</option>
+        <option value="">选择操作员</option>
+    }
+    else
+    {
+        <option value="">选择操作员</option>
+    }
+</select>
+<script>
+    $(function () {
+        var select2_user = $("#select2_user").select2({
+            ajax: {
+                allowClear: true,
+                url: "@Url.RouteUrl("userData")",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term,
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; },
+            //minimumInputLength: 1,
+            language: "zh-CN"
+        });
+    });
+</script> 
+
+
+
+
+

@@ -1,0 +1,849 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="YuanGouModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivityName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Method" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Level" Type="int" Nullable="false" />
+          <Property Name="ShortMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FullMessage" Type="nvarchar(max)" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="PageUrl" Type="nvarchar(max)" />
+          <Property Name="ReferrerUrl" Type="nvarchar(max)" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SysResource" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="Modifier" Type="uniqueidentifier" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="SslEnabled" Type="bit" Nullable="false" />
+          <Property Name="Disabled" Type="bit" Nullable="false" />
+          <Property Name="IconClass" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Creator" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="Modifier" Type="uniqueidentifier" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Account" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="MobilePhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="2" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="LoginFailedNum" Type="int" Nullable="false" />
+          <Property Name="AllowLoginTime" Type="datetime" />
+          <Property Name="LoginLock" Type="bit" Nullable="false" />
+          <Property Name="LastLoginTime" Type="datetime" />
+          <Property Name="LastIpAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastActivityTime" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DeletedTime" Type="datetime" />
+          <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="Modifier" Type="uniqueidentifier" />
+          <Property Name="Creator" Type="uniqueidentifier" />
+          <Property Name="Avatar" Type="image" />
+        </EntityType>
+        <EntityType Name="SysUserLoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IpAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoginTime" Type="datetime" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SysUserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SysUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ExpireTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PermissionRecord_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysPermission" Type="Self.SysPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysPermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionRecord_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysPermission" Type="Self.SysPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysPermission">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRole_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRole">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRole_SysUser1">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRole">
+              <PropertyRef Name="Modifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysStore_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysStore" Type="Self.SysStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStore">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysStore_SysUser_Modifier">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysStore" Type="Self.SysStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStore">
+              <PropertyRef Name="Modifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUser_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUser1" Type="Self.SysUser" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUser1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUser_SysUser_creator">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="0..1" />
+          <End Role="SysUser1" Type="Self.SysUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUser1">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserLoginLog_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserLoginLog" Type="Self.SysUserLoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserLoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRole_SysRole">
+          <End Role="SysRole" Type="Self.SysRole" Multiplicity="1" />
+          <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRole_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserRole" Type="Self.SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserToken_SysUser">
+          <End Role="SysUser" Type="Self.SysUser" Multiplicity="1" />
+          <End Role="SysUserToken" Type="Self.SysUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserToken">
+              <PropertyRef Name="SysUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YuanGouModelStoreContainer">
+          <EntitySet Name="ActivityLog" EntityType="Self.ActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysLog" EntityType="Self.SysLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysPermission" EntityType="Self.SysPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysRole" EntityType="Self.SysRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysStore" EntityType="Self.SysStore" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUser" EntityType="Self.SysUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserLoginLog" EntityType="Self.SysUserLoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserRole" EntityType="Self.SysUserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SysUserToken" EntityType="Self.SysUserToken" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PermissionRecord_SysRole" Association="Self.FK_PermissionRecord_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysPermission" EntitySet="SysPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionRecord_SysUser" Association="Self.FK_PermissionRecord_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysPermission" EntitySet="SysPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRole_SysUser" Association="Self.FK_SysRole_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysRole" EntitySet="SysRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRole_SysUser1" Association="Self.FK_SysRole_SysUser1">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysRole" EntitySet="SysRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysStore_SysUser" Association="Self.FK_SysStore_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysStore" EntitySet="SysStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysStore_SysUser_Modifier" Association="Self.FK_SysStore_SysUser_Modifier">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysStore" EntitySet="SysStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUser_SysUser" Association="Self.FK_SysUser_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUser1" EntitySet="SysUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUser_SysUser_creator" Association="Self.FK_SysUser_SysUser_creator">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUser1" EntitySet="SysUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserLoginLog_SysUser" Association="Self.FK_SysUserLoginLog_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserLoginLog" EntitySet="SysUserLoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRole_SysRole" Association="Self.FK_SysUserRole_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRole_SysUser" Association="Self.FK_SysUserRole_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserToken_SysUser" Association="Self.FK_SysUserToken_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserToken" EntitySet="SysUserToken" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YuanGouModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SniperEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ActivityLog" EntityType="YuanGouModel.ActivityLog" />
+          <EntitySet Name="Setting" EntityType="YuanGouModel.Setting" />
+          <EntitySet Name="SysLog" EntityType="YuanGouModel.SysLog" />
+          <EntitySet Name="SysPermission" EntityType="YuanGouModel.SysPermission" />
+          <EntitySet Name="SysRole" EntityType="YuanGouModel.SysRole" />
+          <EntitySet Name="SysStore" EntityType="YuanGouModel.SysStore" />
+          <EntitySet Name="SysUser" EntityType="YuanGouModel.SysUser" />
+          <EntitySet Name="SysUserLoginLog" EntityType="YuanGouModel.SysUserLoginLog" />
+          <EntitySet Name="SysUserRole" EntityType="YuanGouModel.SysUserRole" />
+          <EntitySet Name="SysUserToken" EntityType="YuanGouModel.SysUserToken" />
+          <AssociationSet Name="FK_PermissionRecord_SysRole" Association="YuanGouModel.FK_PermissionRecord_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysPermission" EntitySet="SysPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PermissionRecord_SysUser" Association="YuanGouModel.FK_PermissionRecord_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysPermission" EntitySet="SysPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRole_SysUser" Association="YuanGouModel.FK_SysRole_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysRole" EntitySet="SysRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysRole_SysUser1" Association="YuanGouModel.FK_SysRole_SysUser1">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysRole" EntitySet="SysRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRole_SysRole" Association="YuanGouModel.FK_SysUserRole_SysRole">
+            <End Role="SysRole" EntitySet="SysRole" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysStore_SysUser" Association="YuanGouModel.FK_SysStore_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysStore" EntitySet="SysStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysStore_SysUser_Modifier" Association="YuanGouModel.FK_SysStore_SysUser_Modifier">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysStore" EntitySet="SysStore" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUser_SysUser" Association="YuanGouModel.FK_SysUser_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUser1" EntitySet="SysUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUser_SysUser_creator" Association="YuanGouModel.FK_SysUser_SysUser_creator">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUser1" EntitySet="SysUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserLoginLog_SysUser" Association="YuanGouModel.FK_SysUserLoginLog_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserLoginLog" EntitySet="SysUserLoginLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserRole_SysUser" Association="YuanGouModel.FK_SysUserRole_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserRole" EntitySet="SysUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SysUserToken_SysUser" Association="YuanGouModel.FK_SysUserToken_SysUser">
+            <End Role="SysUser" EntitySet="SysUser" />
+            <End Role="SysUserToken" EntitySet="SysUserToken" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ActivityName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Method" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SysLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Level" Type="Int32" Nullable="false" />
+          <Property Name="ShortMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FullMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReferrerUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="SysPermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SysResource" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="Creator" Type="Guid" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SysRole" Relationship="YuanGouModel.FK_PermissionRecord_SysRole" FromRole="SysPermission" ToRole="SysRole" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_PermissionRecord_SysUser" FromRole="SysPermission" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Creator" Type="Guid" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modifier" Type="Guid" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysPermission" Relationship="YuanGouModel.FK_PermissionRecord_SysRole" FromRole="SysRole" ToRole="SysPermission" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_SysRole_SysUser" FromRole="SysRole" ToRole="SysUser" />
+          <NavigationProperty Name="SysUser1" Relationship="YuanGouModel.FK_SysRole_SysUser1" FromRole="SysRole" ToRole="SysUser" />
+          <NavigationProperty Name="SysUserRole" Relationship="YuanGouModel.FK_SysUserRole_SysRole" FromRole="SysRole" ToRole="SysUserRole" />
+        </EntityType>
+        <EntityType Name="SysStore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SslEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Disabled" Type="Boolean" Nullable="false" />
+          <Property Name="IconClass" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Creator" Type="Guid" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Modifier" Type="Guid" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_SysStore_SysUser" FromRole="SysStore" ToRole="SysUser" />
+          <NavigationProperty Name="SysUser1" Relationship="YuanGouModel.FK_SysStore_SysUser_Modifier" FromRole="SysStore" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Account" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LoginFailedNum" Type="Int32" Nullable="false" />
+          <Property Name="AllowLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LoginLock" Type="Boolean" Nullable="false" />
+          <Property Name="LastLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LastIpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastActivityTime" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="DeletedTime" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="Modifier" Type="Guid" />
+          <Property Name="Creator" Type="Guid" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="SysPermission" Relationship="YuanGouModel.FK_PermissionRecord_SysUser" FromRole="SysUser" ToRole="SysPermission" />
+          <NavigationProperty Name="SysRole" Relationship="YuanGouModel.FK_SysRole_SysUser" FromRole="SysUser" ToRole="SysRole" />
+          <NavigationProperty Name="SysRole1" Relationship="YuanGouModel.FK_SysRole_SysUser1" FromRole="SysUser" ToRole="SysRole" />
+          <NavigationProperty Name="SysStore" Relationship="YuanGouModel.FK_SysStore_SysUser" FromRole="SysUser" ToRole="SysStore" />
+          <NavigationProperty Name="SysStore1" Relationship="YuanGouModel.FK_SysStore_SysUser_Modifier" FromRole="SysUser" ToRole="SysStore" />
+          <NavigationProperty Name="SysUser1" Relationship="YuanGouModel.FK_SysUser_SysUser" FromRole="SysUser" ToRole="SysUser1" />
+          <NavigationProperty Name="SysUser2" Relationship="YuanGouModel.FK_SysUser_SysUser" FromRole="SysUser1" ToRole="SysUser" />
+          <NavigationProperty Name="SysUser11" Relationship="YuanGouModel.FK_SysUser_SysUser_creator" FromRole="SysUser" ToRole="SysUser1" />
+          <NavigationProperty Name="SysUser3" Relationship="YuanGouModel.FK_SysUser_SysUser_creator" FromRole="SysUser1" ToRole="SysUser" />
+          <NavigationProperty Name="SysUserLoginLog" Relationship="YuanGouModel.FK_SysUserLoginLog_SysUser" FromRole="SysUser" ToRole="SysUserLoginLog" />
+          <NavigationProperty Name="SysUserRole" Relationship="YuanGouModel.FK_SysUserRole_SysUser" FromRole="SysUser" ToRole="SysUserRole" />
+          <NavigationProperty Name="SysUserToken" Relationship="YuanGouModel.FK_SysUserToken_SysUser" FromRole="SysUser" ToRole="SysUserToken" />
+        </EntityType>
+        <EntityType Name="SysUserLoginLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="IpAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_SysUserLoginLog_SysUser" FromRole="SysUserLoginLog" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="SysRole" Relationship="YuanGouModel.FK_SysUserRole_SysRole" FromRole="SysUserRole" ToRole="SysRole" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_SysUserRole_SysUser" FromRole="SysUserRole" ToRole="SysUser" />
+        </EntityType>
+        <EntityType Name="SysUserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="SysUserId" Type="Guid" Nullable="false" />
+          <Property Name="ExpireTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SysUser" Relationship="YuanGouModel.FK_SysUserToken_SysUser" FromRole="SysUserToken" ToRole="SysUser" />
+        </EntityType>
+        <Association Name="FK_PermissionRecord_SysRole">
+          <End Type="YuanGouModel.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="YuanGouModel.SysPermission" Role="SysPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysPermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PermissionRecord_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysPermission" Role="SysPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysPermission">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRole_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysRole" Role="SysRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRole">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysRole_SysUser1">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="YuanGouModel.SysRole" Role="SysRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysRole">
+              <PropertyRef Name="Modifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRole_SysRole">
+          <End Type="YuanGouModel.SysRole" Role="SysRole" Multiplicity="1" />
+          <End Type="YuanGouModel.SysUserRole" Role="SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysStore_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysStore" Role="SysStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStore">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysStore_SysUser_Modifier">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="YuanGouModel.SysStore" Role="SysStore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysStore">
+              <PropertyRef Name="Modifier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUser_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysUser" Role="SysUser1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUser1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUser_SysUser_creator">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="0..1" />
+          <End Type="YuanGouModel.SysUser" Role="SysUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUser1">
+              <PropertyRef Name="Creator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserLoginLog_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysUserLoginLog" Role="SysUserLoginLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserLoginLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserRole_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysUserRole" Role="SysUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SysUserToken_SysUser">
+          <End Type="YuanGouModel.SysUser" Role="SysUser" Multiplicity="1" />
+          <End Type="YuanGouModel.SysUserToken" Role="SysUserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SysUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SysUserToken">
+              <PropertyRef Name="SysUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YuanGouModelStoreContainer" CdmEntityContainer="SniperEntities" >
+          <EntitySetMapping Name="ActivityLog">
+            <EntityTypeMapping TypeName="YuanGouModel.ActivityLog">
+              <MappingFragment StoreEntitySet="ActivityLog">
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setting">
+            <EntityTypeMapping TypeName="YuanGouModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysLog">
+            <EntityTypeMapping TypeName="YuanGouModel.SysLog">
+              <MappingFragment StoreEntitySet="SysLog">
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="ReferrerUrl" ColumnName="ReferrerUrl" />
+                <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="FullMessage" ColumnName="FullMessage" />
+                <ScalarProperty Name="ShortMessage" ColumnName="ShortMessage" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysPermission">
+            <EntityTypeMapping TypeName="YuanGouModel.SysPermission">
+              <MappingFragment StoreEntitySet="SysPermission">
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="SysResource" ColumnName="SysResource" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysRole">
+            <EntityTypeMapping TypeName="YuanGouModel.SysRole">
+              <MappingFragment StoreEntitySet="SysRole">
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysStore">
+            <EntityTypeMapping TypeName="YuanGouModel.SysStore">
+              <MappingFragment StoreEntitySet="SysStore">
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="IconClass" ColumnName="IconClass" />
+                <ScalarProperty Name="Disabled" ColumnName="Disabled" />
+                <ScalarProperty Name="SslEnabled" ColumnName="SslEnabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUser">
+            <EntityTypeMapping TypeName="YuanGouModel.SysUser">
+              <MappingFragment StoreEntitySet="SysUser">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="DeletedTime" ColumnName="DeletedTime" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastActivityTime" ColumnName="LastActivityTime" />
+                <ScalarProperty Name="LastIpAddress" ColumnName="LastIpAddress" />
+                <ScalarProperty Name="LastLoginTime" ColumnName="LastLoginTime" />
+                <ScalarProperty Name="LoginLock" ColumnName="LoginLock" />
+                <ScalarProperty Name="AllowLoginTime" ColumnName="AllowLoginTime" />
+                <ScalarProperty Name="LoginFailedNum" ColumnName="LoginFailedNum" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserLoginLog">
+            <EntityTypeMapping TypeName="YuanGouModel.SysUserLoginLog">
+              <MappingFragment StoreEntitySet="SysUserLoginLog">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserRole">
+            <EntityTypeMapping TypeName="YuanGouModel.SysUserRole">
+              <MappingFragment StoreEntitySet="SysUserRole">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SysUserToken">
+            <EntityTypeMapping TypeName="YuanGouModel.SysUserToken">
+              <MappingFragment StoreEntitySet="SysUserToken">
+                <ScalarProperty Name="ExpireTime" ColumnName="ExpireTime" />
+                <ScalarProperty Name="SysUserId" ColumnName="SysUserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

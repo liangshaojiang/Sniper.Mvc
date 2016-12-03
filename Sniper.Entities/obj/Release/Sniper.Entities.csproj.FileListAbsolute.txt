@@ -1,0 +1,12 @@
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\Sniper.Entities.dll.config
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\Sniper.Entities.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\Sniper.Entities.pdb
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\EntityFramework.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\EntityFramework.SqlServer.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\EntityFramework.xml
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\EntityFramework.SqlServer.xml
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\zh-Hans\EntityFramework.resources.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\bin\Release\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\obj\Release\Sniper.Entities.csprojResolveAssemblyReference.cache
+E:\一些案例\Sniper.Mvc\Sniper.Entities\obj\Release\Sniper.Entities.dll
+E:\一些案例\Sniper.Mvc\Sniper.Entities\obj\Release\Sniper.Entities.pdb

@@ -1,0 +1,12 @@
+﻿@using Sniper.Mapping.SysRole
+@model IEnumerable<SysRoleMapping>
+@if(Model!=null && Model.Any())
+{ 
+    <select name="roleId" class="form-control">
+        <option value="" @(ViewBag.RoleId==null?"selected=selected":"")>选择角色</option>
+        @foreach (var item in Model)
+        { 
+            <option value="@item.Id" @(item.Id==ViewBag.RoleId?"selected=selected":"")>@item.Name</option>
+        }
+    </select>
+}

@@ -1,0 +1,150 @@
+﻿@using Sniper.Mapping.SysRole
+@using Sniper.Admin.Framework.Menu
+@model RolePermissionViewModel
+@{
+    ViewBag.Title = "角色权限设置";
+    var list = ReflectManager.Instance.Descripers;
+}
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.RouteUrl("homeIndex")">首页</a>
+        </li>
+        <li><a href="@Url.RouteUrl("roleIndex")">角色列表</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ul>
+</div>
+<div class="page-content">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="row">
+        <div class="col-sm-12">
+            @using (Html.BeginRouteForm("rolePermission", new { }, FormMethod.Post, new { @class = "form-horizontal", id = "formRolePermission", onsubmit = "return false;" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Id",Model.Role.Id)
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <div class="btn-group">
+                            <button data-toggle="dropdown" class="btn dropdown-toggle">
+                                @Model.Role.Name
+                                <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-default">
+                                @foreach (var item in Model.RoleList)
+                                {
+                                    <li>
+                                        <a href="@Url.RouteUrl("rolePermission",new { id = item.Id })">@item.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @{
+                        var nodes = list.Where(o => String.IsNullOrEmpty(o.FatherResource)).OrderBy(o => o.Name).ToList();
+                        foreach (var item in nodes)
+                        {
+                            var childNodes = list.Where(o => o.FatherResource == item.SysResource).ToList();
+                            <div class="col-sm-4">
+                                <div class="widget-box">
+                                    <div class="widget-header widget-header-flat">
+                                        <h4 class="widget-title"><label @(Model.Permissions != null && Model.Permissions.Any(o=>o.SysResource==item.SysResource)? "class=text-danger":"") >
+                                            <input type="checkbox" name="sysResource" value="@item.SysResource" @(Model.Permissions != null && Model.Permissions.Any(o=>o.SysResource==item.SysResource)?"checked=checked":"") /> @item.Name</label></h4>
+                                    </div>
+                                    <div class="widget-body">
+                                        <div class="widget-main">
+                                            @if (childNodes.Any())
+                                            {
+                                                <ul>
+                                                    @foreach (var child in childNodes)
+                                                    {
+                                                        @RenderItem(child, list)
+                                                    }
+                                                </ul>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="col-md-offset-1">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        提交保存
+                    </button>
+                </div>
+              }
+        </div>
+    </div>
+</div>
+    @helper RenderItem(DescriperAttribute item, List<DescriperAttribute> list)
+    {
+    var childNodes = list.Where(o => o.FatherResource == item.SysResource).ToList();
+        <li>
+            <label @(Model.Permissions != null && Model.Permissions.Any(o=>o.SysResource==item.SysResource)? "class=text-danger":"") >
+                <input type="checkbox" name="sysResource" value="@item.SysResource" @(Model.Permissions != null && Model.Permissions.Any(o=>o.SysResource==item.SysResource)?"checked=checked":"") /> @item.Name</label>
+        @if (childNodes.Any())
+        {
+                <ul>
+                    @foreach (var child in childNodes)
+                    {
+                        @RenderItem(child, list)
+                    }
+                </ul>
+            }
+        </li>
+    }
+
+<script>
+    $(function () {
+        $('#formRolePermission').submit(function () {
+            var form = $(this);
+            $.modal.confirm('您确定要保存此角色权限数据？', function () {
+                form.ajaxSubmit(function (data) {
+                    $.modal.alert(data);
+                });
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,103 @@
+﻿@using Sniper.Mapping.SysStore
+@model SysStoreMapping
+
+@{
+    ViewBag.Title = "系统设置";
+}
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.RouteUrl("homeIndex")">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul>
+</div>
+<div class="page-content">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="tabbable">
+                <ul class="nav nav-tabs padding-16">
+                    <li class="active">
+                        <a data-toggle="tab" href="#edit-settings">
+                            <i class="purple ace-icon fa fa-cog bigger-125"></i>
+                            基础设置
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content profile-edit-tab-content">
+                    <div id="edit-settings" class="tab-pane active">
+                        @using (Html.BeginRouteForm("editStore", FormMethod.Post, new { @class = "form-horizontal", id = "formStore", onsubmit = "return false;" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-username">显示名称</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "col-xs-12 col-sm-10", placeholder = "显示名称" })
+                                    @Html.ValidationMessageFor(m => m.Name)
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-username">图标样式</label>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.IconClass, new { @class = "col-xs-12 col-sm-10", placeholder = "图标样式" })
+                                    @Html.ValidationMessageFor(m => m.IconClass)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-username">公司名称</label>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "col-xs-12 col-sm-10", placeholder = "公司名称" })
+                                    @Html.ValidationMessageFor(m => m.CompanyName)
+                                </div>
+                            </div>
+                            <div class="space-4"></div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-username">Https</label>
+                                <div class="col-sm-4">
+                                    <label>
+                                        <input type="checkbox" id="SslEnabled" name="SslEnabled" value="true" @(Model!=null && Model.SslEnabled?"checked=checked":"") class="ace">
+                                        <span class="lbl"> 只允许Https连接，需设置Https</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-username">停用</label>
+                                <div class="col-sm-4">
+                                    <label class="inline">
+                                        <input type="checkbox" id="Disabled" name="Disabled" value="true" @(Model!=null && Model.Disabled?"checked=checked":"") class="ace">
+                                        <span class="lbl"> 停用系统</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                        保存
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('#formStore').submit(function () {
+            if ($(this).valid()) {
+                $(this).ajaxSubmit(function (data) {
+                    $.modal.gritter(data)
+                });
+            }
+        });
+    });
+</script>

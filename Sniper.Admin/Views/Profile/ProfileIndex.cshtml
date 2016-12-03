@@ -1,0 +1,381 @@
+﻿@model Sniper.Admin.Models.ProfileModel
+@{
+    ViewBag.Title = "个人中心";
+}
+
+<div class="breadcrumbs" id="breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.RouteUrl("homeIndex")">首页</a>
+        </li>
+        <li class="active">@ViewBag.Title</li>
+    </ul>
+</div>
+<div class="page-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="clearfix">
+                <div class="pull-right">
+                    <span class="green middle bolder">切换: &nbsp;</span>
+                    <div class="btn-toolbar inline middle no-margin">
+                        <div data-toggle="buttons" class="btn-group no-margin">
+                            <label class="btn btn-sm btn-yellow active">
+                                <span class="bigger-110">1</span>
+                                <input type="radio" value="1">
+                            </label>
+                            <label class="btn btn-sm btn-yellow">
+                                <span class="bigger-110">2</span>
+                                <input type="radio" value="2">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hr dotted"></div>
+
+            <div class="">
+                <div id="user-profile-1" class="user-profile row">
+                    <div class="col-xs-12 col-sm-3 center">
+                        <div>
+                            <!-- #section:pages/profile.picture -->
+                            <span class="profile-picture">
+                                <img id="avatar" class="editable img-responsive editable-click editable-empty" alt="Alex's Avatar" onerror="this.src = '/Content/ace/assets/avatars/profile-pic.jpg'" src="@Url.RouteUrl("avatar")" />
+                            </span>
+                            <!-- /section:pages/profile.picture -->
+                            <div class="space-4"></div>
+                            <p>小于100k的jpg,png照片</p>
+                        </div>
+                        <!-- /section:pages/profile.contact -->
+                        <div class="hr hr12 dotted"></div>
+                        <!-- #section:custom/extra.grid -->
+                        <div class="clearfix">
+                            <div class="grid2">
+                                <span class="bigger-175 blue">25</span>
+
+                                <br>
+                                Followers
+                            </div>
+
+                            <div class="grid2">
+                                <span class="bigger-175 blue">12</span>
+
+                                <br>
+                                Following
+                            </div>
+                        </div>
+
+                        <!-- /section:custom/extra.grid -->
+                        <div class="hr hr16 dotted"></div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="center">
+                            <span class="btn btn-app btn-sm btn-light no-hover">
+                                <span class="line-height-1 bigger-170 blue"> 1,411 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Views </span>
+                            </span>
+
+                            <span class="btn btn-app btn-sm btn-yellow no-hover">
+                                <span class="line-height-1 bigger-170"> 32 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Followers </span>
+                            </span>
+
+                            <span class="btn btn-app btn-sm btn-pink no-hover">
+                                <span class="line-height-1 bigger-170"> 4 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Projects </span>
+                            </span>
+
+                            <span class="btn btn-app btn-sm btn-grey no-hover">
+                                <span class="line-height-1 bigger-170"> 23 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Reviews </span>
+                            </span>
+
+                            <span class="btn btn-app btn-sm btn-success no-hover">
+                                <span class="line-height-1 bigger-170"> 7 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Albums </span>
+                            </span>
+
+                            <span class="btn btn-app btn-sm btn-primary no-hover">
+                                <span class="line-height-1 bigger-170"> 55 </span>
+
+                                <br>
+                                <span class="line-height-1 smaller-90"> Contacts </span>
+                            </span>
+                        </div>
+
+                        <div class="space-12"></div>
+
+                        <!-- #section:pages/profile.info -->
+                        <div class="profile-user-info profile-user-info-striped">
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 账号 </div>
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="username">@Model.User.Account</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 姓名 </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="country">@Model.User.Name</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 手机号码 </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="age">@Model.User.MobilePhone</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 性别 </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="signup">@Model.User.Sex</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> 登录时间 </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="login">@(Model.User.LastLoginTime?.ToString("F"))</span>
+                                </div>
+                            </div>
+
+                            <div class="profile-info-row">
+                                <div class="profile-info-name"> IP地址 </div>
+
+                                <div class="profile-info-value">
+                                    <span class="editable editable-click" id="about">@Model.User.LastIpAddress</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- /section:pages/profile.info -->
+                        <div class="space-20"></div>
+
+                        <div class="widget-box transparent">
+                            <div class="widget-header widget-header-small">
+                                <h4 class="widget-title blue smaller">
+                                    <i class="ace-icon fa fa-rss orange"></i>
+                                    登录记录
+                                </h4>
+                            </div>
+
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <!-- #section:pages/profile.feed -->
+                                    <div id="profile-feed-1" class="profile-feed" style="position: relative;">
+                                        <div class="scroll-track">
+                                            <div class="scroll-bar" style="height: 63px; top: 17px;"></div>
+                                        </div>
+                                        <div class="scroll-content">
+                                            @foreach (var item in Model.LoginLogList)
+                                            {
+                                                <div class="profile-activity clearfix">
+                                                    <div class="time">
+                                                        <i class="ace-icon fa fa-clock-o bigger-110"></i>
+                                                        @item.LoginTime.ToString("yyyy-MM-dd HH:mm:ss") &nbsp;<span class="text-success"> @item.Message</span>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="hide">
+                <div id="user-profile-2" class="user-profile row">
+                    <div class="col-sm-offset-1 col-sm-10">
+
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs padding-16">
+                                <li class="active">
+                                    <a data-toggle="tab" href="#edit-basic">
+                                        <i class="green ace-icon fa fa-pencil-square-o bigger-125"></i>
+                                        修改资料
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a data-toggle="tab" href="#edit-password">
+                                        <i class="blue ace-icon fa fa-key bigger-125"></i>
+                                        修改密码
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content profile-edit-tab-content">
+
+                                <div id="edit-basic" class="tab-pane active">
+                                    @using (Html.BeginRouteForm("changeInfo", new { }, FormMethod.Post, new { @class = "form-horizontal", id = "formChangeInfo", onsubmit = "return false" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.HiddenFor(m => m.User.Account, new { Id = "Account", Name = "Account" })
+                                        <h4 class="header blue bolder smaller">General</h4>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-username">姓名</label>
+                                            <div class="col-sm-4">
+                                                @Html.TextBoxFor(m => m.User.Name, new { @class = "col-xs-12 col-sm-10", Id = "Name", Name = "Name", placeholder = "用户姓名" })
+                                                @Html.ValidationMessage("Name")
+                                            </div>
+                                        </div>
+                                        <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label no-padding-right">性别</label>
+                                                <div class="col-sm-9">
+                                                    <label class="inline">
+                                                        @Html.RadioButtonFor(m=>m.User.Sex,"男",new { id="sex1",Name="Sex",@class= "ace" })
+                                                        <span class="lbl middle"> 男</span>
+                                                    </label>
+                                                    &nbsp; &nbsp; &nbsp;
+                                                    <label class="inline">
+                                                        @Html.RadioButtonFor(m => m.User.Sex, "女", new { id = "sex2", Name = "Sex", @class = "ace" })
+                                                        <span class="lbl middle"> 女</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="space"></div>
+                                            <h4 class="header blue bolder smaller">联系方式</h4>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-email">邮箱地址</label>
+                                                <div class="col-sm-9">
+                                                    <span class="input-icon input-icon-right"> 
+                                                        @Html.TextBoxFor(m=>m.User.Email,new { Id = "Email", Name= "Email" })
+                                                        <i class="ace-icon fa fa-envelope"></i>
+                                                    </span>
+                                                    @Html.ValidationMessage("Email")
+                                                </div>
+                                            </div>
+                                            <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-phone">手机号码</label>
+                                                <div class="col-sm-9">
+                                                    <span class="input-icon input-icon-right">
+                                                        @Html.TextBoxFor(m => m.User.MobilePhone, new { Id = "MobilePhone", Name = "MobilePhone" })
+                                                        <i class="ace-icon fa fa-phone fa-flip-horizontal"></i>
+                                                    </span>
+                                                    @Html.ValidationMessage("MobilePhone")
+                                                </div>
+                                            </div>
+                                            <div class="clearfix form-actions">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button class="btn btn-info" type="submit">
+                                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                                        保存
+                                                    </button>
+
+                                                    &nbsp; &nbsp;
+                                                    <button class="btn" type="reset">
+                                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                        重置
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    }
+                                </div>
+
+                                <div id="edit-password" class="tab-pane">
+                                    @using (Html.BeginRouteForm("changPassword", new { }, FormMethod.Post, new { @class = "form-horizontal", id = "formChangPwd", onsubmit = "return false;" }))
+                                    {
+                                        <input type="hidden" id="Salt" value="@Model.User.Salt" />
+
+                                        <div class="space-10"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label no-padding-right" for="form-field-pass1">新密码</label>
+                                            <div class="col-sm-9">
+                                                @Html.PasswordFor(m => m.ChangePassword.Password, new { Id = "Password", Name = "Password" })
+                                                @Html.ValidationMessage("Password", new { })
+                                            </div>
+                                        </div>
+                                            <div class="space-4"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label no-padding-right" for="form-field-pass2">确认密码</label>
+                                                <div class="col-sm-9">
+                                                    @Html.PasswordFor(m => m.ChangePassword.Password, new { Id = "ConfirmPassword", Name = "ConfirmPassword" })
+                                                    @Html.ValidationMessage("ConfirmPassword", new { })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix form-actions">
+                                                <div class="col-md-offset-3 col-md-9">
+                                                    <button class="btn btn-info" type="submit">
+                                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                                        保存
+                                                    </button>
+
+                                                    &nbsp; &nbsp;
+                                                    <button class="btn" type="reset">
+                                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                                        重置
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.span -->
+                </div><!-- /.user-profile -->
+            </div>
+
+            <!-- PAGE CONTENT ENDS -->
+        </div><!-- /.col -->
+    </div>
+
+</div>
+@Scripts.Render("~/bundles/js/avatarUpdate")
+<script type="text/javascript">
+    var UPLOAD_URL = '@Url.RouteUrl("avatarUpload")'
+    $(function () {
+        $('[data-toggle="buttons"] .btn').on('click', function (e) {
+            var target = $(this).find('input[type=radio]');
+            var which = parseInt(target.val());
+            $('.user-profile').parent().addClass('hide');
+            $('#user-profile-' + which).parent().removeClass('hide');
+        });
+        $('#formChangPwd').submit(function () {
+            if ($(this).valid()) {
+                var password = $.md5($('#Password').val() + $('#Salt').val());
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'post',
+                    datatype: 'json',
+                    data: { Password: password, ConfirmPassword: password, __RequestVerificationToken: $('[name="__RequestVerificationToken"]').val() },
+                    success: function (data) {
+                        $.modal.gritter(data);
+                    }
+                });
+            }
+        });
+        $('#formChangeInfo').submit(function () {
+            if($(this).valid()){
+                $(this).ajaxSubmit(function (data) {
+                    $.modal.alert(data);
+                });
+            }
+        });
+    });
+</script> 
